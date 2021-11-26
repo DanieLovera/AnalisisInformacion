@@ -15,7 +15,7 @@ public class ClientController {
     private ClientService clientService;
 
     @GetMapping("/clients")
-    public Collection<Client> getAccounts() {
+    public Collection<Client> getClients() {
         return clientService.getClients();
     }
 }

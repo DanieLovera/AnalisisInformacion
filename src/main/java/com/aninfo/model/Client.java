@@ -11,4 +11,16 @@ public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long clientId;
+
+    private String razonSocial;
+    private String cuit;
+
+    protected Client() {
+
+    }
+
+    public Client(String razonSocial, String cuit){
+        this.razonSocial = razonSocial;
+        this.cuit = cuit;
+    }
 }
