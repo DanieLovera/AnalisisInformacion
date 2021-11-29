@@ -6,9 +6,11 @@ import com.aninfo.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.*;
 
+import org.springframework.web.client.RestTemplate;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.spi.DocumentationType;
@@ -22,16 +24,9 @@ import java.util.Collection;
 @SpringBootApplication
 @EnableSwagger2
 public class SupportApp {
-	public static void main(String[] args) {
-		SpringApplication.run(SupportApp.class, args);
-	}
-
-	@Autowired
-	private ClientController clientController;
-
-	@GetMapping("/accounts")
-	public Collection<Client> getAccounts() {
-		return clientController.getClients();
+	@Bean
+	public RestTemplate restTemplate(RestTemplateBuilder builder) {
+		return builder.build();
 	}
 
 	@Bean
@@ -41,5 +36,9 @@ public class SupportApp {
 				.apis(RequestHandlerSelectors.any())
 				.paths(PathSelectors.any())
 				.build();
+	}
+
+	public static void main(String[] args) {
+		SpringApplication.run(SupportApp.class, args);
 	}
 }
