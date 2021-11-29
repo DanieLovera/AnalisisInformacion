@@ -1,26 +1,24 @@
 package com.aninfo.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-@Entity
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Client {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @JsonProperty("id")
     private Long clientId;
-
+    @JsonProperty("razon social")
     private String razonSocial;
+    @JsonProperty("CUIT")
     private String cuit;
 
-    protected Client() {
-
-    }
-
-    public Client(String razonSocial, String cuit){
-        this.razonSocial = razonSocial;
-        this.cuit = cuit;
+    @Override
+    public String toString() {
+        return "Cliente {" +
+                "ID = " + clientId +
+                ", Razon Social = " + razonSocial +
+                ", CUIT = " + cuit +
+                " }";
     }
 }
