@@ -15,7 +15,7 @@ public class TicketController {
     private TicketService ticketService;
 
     @GetMapping("/tickets")
-    public Collection<Ticket> getClients() {
+    public Collection<Ticket> getTickets() {
         return ticketService.getTickets();
     }
 }

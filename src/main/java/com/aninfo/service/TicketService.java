@@ -15,9 +15,9 @@ public class TicketService {
         private TicketRespository ticketRespository;
 
         public Collection<Ticket> getTickets() {
-            ArrayList<Ticket> clients = new ArrayList<>();
-            ticketRespository.findAll().forEach(clients::add);
-            return clients;
+            ArrayList<Ticket> tickets = new ArrayList<>();
+            ticketRespository.findAll().forEach(tickets::add);
+            return tickets;
         }
 
 }
