@@ -21,9 +21,7 @@ public class ClientService {
                                       "/1.0.0/m/api/clientes";
 
     public Collection<Client> getClients() {
-        //Client[] clients = restTemplate.getForObject(url, Client[].class);
-        ArrayList<Client> clients = new ArrayList<>();
-        //return Arrays.asList(clients);
-        return clients;
+        Client[] clients = restTemplate.getForObject(url, Client[].class);
+        return Arrays.asList(clients);
     }
 }
