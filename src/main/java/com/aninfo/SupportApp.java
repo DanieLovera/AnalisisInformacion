@@ -37,7 +37,7 @@ public class SupportApp {
 				.paths(PathSelectors.any())
 				.build();
 	}
-// blabla
+
 	public static void main(String[] args) {
 		SpringApplication.run(SupportApp.class, args);
 	}
