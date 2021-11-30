@@ -1,10 +1,12 @@
 package com.aninfo.service;
 
 import com.aninfo.model.Client;
+import org.hibernate.mapping.Array;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 
@@ -19,7 +21,9 @@ public class ClientService {
                                       "/1.0.0/m/api/clientes";
 
     public Collection<Client> getClients() {
-        Client[] clients = restTemplate.getForObject(url, Client[].class);
-        return Arrays.asList(clients);
+        //Client[] clients = restTemplate.getForObject(url, Client[].class);
+        ArrayList<Client> clients = new ArrayList<>();
+        //return Arrays.asList(clients);
+        return clients;
     }
 }
