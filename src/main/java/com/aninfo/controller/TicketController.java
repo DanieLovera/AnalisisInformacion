@@ -21,7 +21,7 @@ public class TicketController {
     }
 
     @GetMapping("/tickets")
-    public Collection<Ticket> getTickets() {
+    public Collection<Ticket> getAll() {
         return ticketService.getTickets();
     }
 
@@ -31,7 +31,7 @@ public class TicketController {
     }
 
     @DeleteMapping("/tickets/{ticketID}")
-    public void deleteAccount(Long ticketID) {
+    public void delete(Long ticketID) {
         ticketService.delete(ticketID);
     }
 }

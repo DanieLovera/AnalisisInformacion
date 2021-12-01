@@ -15,7 +15,12 @@ public class ClientController {
     private ClientService clientService;
 
     @GetMapping("/clients")
-    public Collection<Client> getClients() {
+    public Collection<Client> getAll() {
         return clientService.getClients();
     }
+    /*
+    @GetMapping("/clients")
+    public String getClients() {
+        return clientService.getClients().toArray()[0].toString();
+    }*/
 }
