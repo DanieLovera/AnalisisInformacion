@@ -16,7 +16,7 @@ public class TicketController {
 
     @PostMapping("/tickets")
     @ResponseStatus(HttpStatus.CREATED)
-    public Ticket create(Ticket ticket) {
+    public Ticket create(@RequestBody Ticket ticket) {
         return ticketService.create(ticket);
     }
 

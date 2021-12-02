@@ -20,10 +20,24 @@ public class Ticket {
     @Column(name = "state")
     private String state;
 
-    public Ticket() {
-        title = "titulo de prueba";
-        message = "mensaje de prueba";
-        state = "inactivo";
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public String getState() {
+        return state;
     }
 
     public void setState(String state) {
