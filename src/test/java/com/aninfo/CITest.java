@@ -7,6 +7,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class CITest {
     @Test
     void dummieTest() {
-        assertTrue(false);
+        assertTrue(true);
     }
 }
