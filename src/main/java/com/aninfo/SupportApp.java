@@ -1,9 +1,5 @@
 package com.aninfo;
 
-import com.aninfo.controller.ClientController;
-import com.aninfo.model.Client;
-import com.aninfo.service.ClientService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.client.RestTemplateBuilder;
@@ -16,8 +12,6 @@ import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
-
-import java.util.Collection;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
