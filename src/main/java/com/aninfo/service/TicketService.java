@@ -1,10 +1,12 @@
 package com.aninfo.service;
 
-import com.aninfo.model.Ticket;
+import com.aninfo.model.ticket.State;
+import com.aninfo.model.ticket.Ticket;
 import com.aninfo.repository.TicketRespository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Optional;
@@ -12,11 +14,19 @@ import java.util.Optional;
 @Service
 public class TicketService {
 
-        @Autowired
         private TicketRespository ticketRespository;
 
+        @Autowired
+        public TicketService(TicketRespository ticketRespository) {
+            this.ticketRespository = ticketRespository;
+        }
+
         public Ticket create(Ticket ticket) {
-            //Ticket ti = new Ticket();
+            int severityDays = ticket.getSeverity().getValue();
+            LocalDate currentDate = LocalDate.now();
+            ticket.setCreatedDate(currentDate);
+            ticket.setExpectedDate(currentDate.plusDays(severityDays));
+            ticket.setState(State.OPEN);
             return ticketRespository.save(ticket);
         }
 
@@ -26,7 +36,7 @@ public class TicketService {
             return tickets;
         }
 
-        public Ticket update(Long ticketID, String state) {
+        public Ticket update(Long ticketID, State state) {
             Optional<Ticket> oticket = ticketRespository.findById(ticketID);
             Ticket ticket = oticket.get();
             ticket.setState(state);

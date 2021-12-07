@@ -1,6 +1,6 @@
 package com.aninfo.repository;
 
-import com.aninfo.model.Ticket;
+import com.aninfo.model.ticket.Ticket;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
