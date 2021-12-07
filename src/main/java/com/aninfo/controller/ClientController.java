@@ -1,6 +1,6 @@
 package com.aninfo.controller;
 
-import com.aninfo.model.Client;
+import com.aninfo.model.client.Client;
 import com.aninfo.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,9 +18,4 @@ public class ClientController {
     public Collection<Client> getAll() {
         return clientService.getClients();
     }
-    /*
-    @GetMapping("/clients")
-    public String getClients() {
-        return clientService.getClients().toArray()[0].toString();
-    }*/
 }

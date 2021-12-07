@@ -1,4 +1,4 @@
-package com.aninfo.model;
+package com.aninfo.model.client;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -12,13 +12,4 @@ public class Client {
     private String razonSocial;
     @JsonProperty("CUIT")
     private String cuit;
-
-    @Override
-    public String toString() {
-        return "Cliente {" +
-                "ID = " + clientId +
-                ", Razon Social = " + razonSocial +
-                ", CUIT = " + cuit +
-                " }";
-    }
 }
