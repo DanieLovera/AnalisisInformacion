@@ -13,6 +13,7 @@ import java.util.Collection;
 
 @RestController
 @RequestMapping(path = "tickets")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class TicketController {
 
     private TicketService ticketService;
@@ -24,6 +25,7 @@ public class TicketController {
 
     @PostMapping
     public Ticket create(@RequestBody Ticket ticket) {
+
         return ticketService.create(ticket);
     }
 
