@@ -26,6 +26,9 @@ public class Ticket {
     @Column(name = "employee_id")
     private Long employeeID;
 
+    @Column(name = "task_id")
+    private Long taskID;
+
     @Column(name = "subject")
     private String subject;
 
@@ -47,8 +50,8 @@ public class Ticket {
     private LocalDate createdDate;
 
     @Column(name = "expected_date")
-    @JsonDeserialize(using = LocalDateDeserializer.class)
-    @JsonSerialize(using = LocalDateSerializer.class)
+    //@JsonDeserialize(using = LocalDateDeserializer.class)
+    //@JsonSerialize(using = LocalDateSerializer.class)
     @JsonIgnore
     private LocalDate expectedDate;
 
@@ -64,6 +67,8 @@ public class Ticket {
     public Long getEmployeeID() {
         return employeeID;
     }
+
+    public Long getTaskID() { return taskID; }
 
     public String getSubject() {
         return subject;
@@ -108,6 +113,8 @@ public class Ticket {
     public void setEmployeeID(Long employeeID) {
         this.employeeID = employeeID;
     }
+
+    public void setTaskID(Long taskID) { this.taskID = taskID; }
 
     public void setSubject(String subject) {
         this.subject = subject;

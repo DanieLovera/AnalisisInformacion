@@ -3,6 +3,7 @@ package com.aninfo.controller;
 import com.aninfo.model.ticket.Severity;
 import com.aninfo.model.ticket.State;
 import com.aninfo.model.ticket.Ticket;
+import com.aninfo.model.ticket.Type;
 import com.aninfo.service.TicketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -31,17 +32,15 @@ public class TicketController {
         return ticketService.getTickets();
     }
 
+    @GetMapping(path = "out_of_time")
+    public Collection<Ticket> getAllOutOfTime() {
+        return ticketService.getOutOfTimeTickets();
+    }
 
-    /*@GetMapping
-    public Collection<Ticket> get() {
-        Collection<Ticket> tickets = ticketService.getTickets();
-        Collection<Ticket> filteredTickets = new ArrayList<>();
-        for (Ticket ticket : tickets) {
-            filteredTickets.add(ticket);
-        }
-        return filteredTickets;
-
-    }*/
+    @GetMapping(path = "{type}")
+    public Collection<Ticket> getAllByType(@PathVariable("type") Type type) {
+        return ticketService.getTicketsByType(type);
+    }
 
     @PutMapping(path = "{ticketID}")
     public Ticket update(@PathVariable("ticketID") Long ticketID,
