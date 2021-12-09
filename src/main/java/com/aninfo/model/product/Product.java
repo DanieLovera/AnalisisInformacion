@@ -13,6 +13,12 @@ public class Product {
     @JsonProperty("version")
     private Float version;
 
+    public Product(Long productID, String name, Float version) {
+        this.productID = productID;
+        this.name = name;
+        this.version = version;
+    }
+
     public Long getProductID() {
         return productID;
     }

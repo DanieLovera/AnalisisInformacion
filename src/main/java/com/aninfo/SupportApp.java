@@ -23,17 +23,6 @@ import java.util.Arrays;
 @SpringBootApplication
 @EnableSwagger2
 public class SupportApp {
-//public class SupportApp implements CommandLineRunner {
-
-	/*@Override
-	public void run(String[] args) throws IOException {
-		ObjectMapper objectMapper = new ObjectMapper();
-		Product[] products = objectMapper.readValue
-				(new File("C:\\Users\\USUARIO\\Desktop\\soporte\\src\\main\\resources\\products.json")
-						, Product[].class);
-		System.out.println(Arrays.toString(products));
-	}*/
-
 	@Bean
 	public RestTemplate restTemplate(RestTemplateBuilder builder) {
 		return builder.build();
