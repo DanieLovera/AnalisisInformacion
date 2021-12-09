@@ -1,5 +1,8 @@
 package com.aninfo;
 
+import com.aninfo.model.product.Product;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.client.RestTemplateBuilder;
@@ -13,9 +16,24 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.Arrays;
+
 @SpringBootApplication
 @EnableSwagger2
 public class SupportApp {
+//public class SupportApp implements CommandLineRunner {
+
+	/*@Override
+	public void run(String[] args) throws IOException {
+		ObjectMapper objectMapper = new ObjectMapper();
+		Product[] products = objectMapper.readValue
+				(new File("C:\\Users\\USUARIO\\Desktop\\soporte\\src\\main\\resources\\products.json")
+						, Product[].class);
+		System.out.println(Arrays.toString(products));
+	}*/
+
 	@Bean
 	public RestTemplate restTemplate(RestTemplateBuilder builder) {
 		return builder.build();
