@@ -3,6 +3,9 @@ package com.aninfo.model.product;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Product {
 
@@ -10,13 +13,13 @@ public class Product {
     private Long productID;
     @JsonProperty("name")
     private String name;
-    @JsonProperty("version")
-    private Float version;
+    @JsonProperty("versions")
+    private Collection<Float> versions;
 
-    public Product(Long productID, String name, Float version) {
+    public Product(Long productID, String name, Collection<Float> versions) {
         this.productID = productID;
         this.name = name;
-        this.version = version;
+        this.versions = versions;
     }
 
     public Long getProductID() {
@@ -27,8 +30,8 @@ public class Product {
         return name;
     }
 
-    public Float getVersion() {
-        return version;
+    public Collection<Float> getVersions() {
+        return versions;
     }
 
     public void setProductID(Long productID) {
@@ -39,8 +42,8 @@ public class Product {
         this.name = name;
     }
 
-    public void setVersion(Float version) {
-        this.version = version;
+    public void setVersion(ArrayList<Float> version) {
+        this.versions = version;
     }
 
     @Override
@@ -48,7 +51,7 @@ public class Product {
         return "Product{" +
                 "productID=" + productID +
                 ", name='" + name + '\'' +
-                ", version=" + version +
+                ", versions=" + versions.toString() +
                 '}';
     }
 }

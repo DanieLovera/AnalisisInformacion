@@ -13,7 +13,7 @@ public class ProductService {
     private static final
     ProductRepository productRepository = new ProductRepository();
 
-    public Collection<Product> getProducts() throws IOException {
+    public Collection<Product> getProducts() {
         return productRepository.findAll();
     }
 }

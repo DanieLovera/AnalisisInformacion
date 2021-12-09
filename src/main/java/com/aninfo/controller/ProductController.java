@@ -17,7 +17,7 @@ public class ProductController {
     private ProductService productService;
 
     @GetMapping("/products")
-    public Collection<Product> getAll() throws IOException {
+    public Collection<Product> getAll() {
         return productService.getProducts();
     }
 }
