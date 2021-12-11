@@ -1,8 +1,8 @@
 package com.aninfo.service;
 
+import com.aninfo.model.TicketParams;
 import com.aninfo.model.ticket.State;
 import com.aninfo.model.ticket.Ticket;
-import com.aninfo.model.ticket.Type;
 import com.aninfo.repository.TicketRespository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,25 +27,20 @@ public class TicketService {
             return ticketRespository.save(ticket);
         }
 
-        public Collection<Ticket> getTickets() {
+        public Collection<Ticket> getTickets(TicketParams ticketParams) {
             ArrayList<Ticket> tickets = new ArrayList<>();
-            ticketRespository.findAll().forEach(tickets::add);
-            return tickets;
-        }
+            Iterable<Ticket> itTicket = null;
 
-        public Collection<Ticket> getOutOfTimeTickets() {
-            Collection<Ticket> tickets = getTickets();
-            Collection<Ticket> filteredTickets = new ArrayList<>();
-            for (Ticket ticket : tickets) {
-                if (ticket.getExpectedDate().isBefore(LocalDate.now())) {
-                    filteredTickets.add(ticket);
-                }
+            if (ticketParams.getType() == null && ticketParams.getOutOfTime() == null) {
+                itTicket = ticketRespository.findAll();
+            } else if (ticketParams.getType() != null && ticketParams.getOutOfTime() == null) {
+                itTicket = ticketRespository.findByType(ticketParams.getType());
+            } else if (ticketParams.getOutOfTime() != null && ticketParams.getType() == null) {
+                itTicket = ticketRespository.findByExpectedDateBefore(LocalDate.now());
             }
-            return filteredTickets;
-        }
-
-        public Collection<Ticket> getTicketsByType(Type type) {
-            return  ticketRespository.findByType(type);
+            // TODO: FALTAN TALVEZ CORROBORAR OTROS CASOS O REFACTORIZARLO ...
+            itTicket.forEach(tickets::add);
+            return tickets;
         }
 
         public Ticket update(Long ticketID, State state) {
