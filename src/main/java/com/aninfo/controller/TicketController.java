@@ -25,7 +25,6 @@ public class TicketController {
 
     @PostMapping
     public Ticket create(@RequestBody Ticket ticket) {
-
         return ticketService.create(ticket);
     }
 
@@ -34,24 +33,29 @@ public class TicketController {
         return ticketService.getTickets();
     }
 
-    @GetMapping(path = "out_of_time")
+    @GetMapping(path = "outOfTime")
     public Collection<Ticket> getAllOutOfTime() {
         return ticketService.getOutOfTimeTickets();
     }
 
-    @GetMapping(path = "{type}")
+    /*@GetMapping(path = "{type}")
     public Collection<Ticket> getAllByType(@PathVariable("type") Type type) {
+        return ticketService.getTicketsByType(type);
+    }*/
+
+    @GetMapping(path = "/types")
+    public Collection<Ticket> getAllByType(@RequestParam Type type) {
         return ticketService.getTicketsByType(type);
     }
 
-    @PutMapping(path = "{ticketID}")
-    public Ticket update(@PathVariable("ticketID") Long ticketID,
-                         @RequestBody State state) {
+    @PutMapping(path = "{id}/updateState")
+    public Ticket updateState(@PathVariable("id") Long ticketID,
+                              @RequestParam State state) {
         return ticketService.update(ticketID, state);
-    }
+    } // @RequestBody
 
-    @DeleteMapping(path = "{ticketID}")
-    public void delete(@PathVariable("ticketID") Long ticketID) {
+    @DeleteMapping(path = "{id}")
+    public void delete(@PathVariable("id") Long ticketID) {
         ticketService.delete(ticketID);
     }
 }
