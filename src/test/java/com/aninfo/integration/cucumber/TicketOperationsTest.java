@@ -33,4 +33,10 @@ public class TicketOperationsTest {
     @Then("^El ticket se modifica correctamente a severidad \"([^\"]*)\"$")
     public void check_ticket_state(Severity ticketSeverity){assertEquals(ticket.getSeverity(), ticketSeverity);}
 
+    @When("^Asigno como operario al empleado con ID (\\d+)")
+    public void set_ticket_employee(Long employeeID){ticket.setEmployeeID(employeeID);}
+
+    @Then("^El ticket se modifica correctamente y ahora el id del operario asignado es (\\d+)")
+    public void check_ticket_employee(Long employeeID){assertEquals(ticket.getEmployeeID(), employeeID);}
+
 }
