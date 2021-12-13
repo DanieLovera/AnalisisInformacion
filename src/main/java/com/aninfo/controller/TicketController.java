@@ -1,6 +1,6 @@
 package com.aninfo.controller;
 
-import com.aninfo.model.TicketParams;
+import com.aninfo.model.ticket.TicketParams;
 import com.aninfo.model.ticket.State;
 import com.aninfo.model.ticket.Ticket;
 import com.aninfo.service.TicketService;

@@ -16,7 +16,7 @@ public class ProductRepository {
                                                Float.valueOf(2.0F),
                                                Float.valueOf(3.0F))));
 
-        products.add(new Product(Long.valueOf(1),
+        products.add(new Product(Long.valueOf(2),
                            "Campus FIUBA",
                                  Arrays.asList(Float.valueOf(1.0F),
                                                Float.valueOf(2.0F),

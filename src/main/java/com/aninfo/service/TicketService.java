@@ -1,6 +1,6 @@
 package com.aninfo.service;
 
-import com.aninfo.model.TicketParams;
+import com.aninfo.model.ticket.TicketParams;
 import com.aninfo.model.ticket.State;
 import com.aninfo.model.ticket.Ticket;
 import com.aninfo.repository.TicketRespository;
@@ -31,13 +31,22 @@ public class TicketService {
             ArrayList<Ticket> tickets = new ArrayList<>();
             Iterable<Ticket> itTicket = null;
 
-            if (ticketParams.getType() == null && ticketParams.getOutOfTime() == null) {
+            /*if (ticketParams.getType() == null && ticketParams.getOutOfTime() == null) {
                 itTicket = ticketRespository.findAll();
             } else if (ticketParams.getType() != null && ticketParams.getOutOfTime() == null) {
                 itTicket = ticketRespository.findByType(ticketParams.getType());
             } else if (ticketParams.getOutOfTime() != null && ticketParams.getType() == null) {
                 itTicket = ticketRespository.findByExpectedDateBefore(LocalDate.now());
+            }*/
+
+            if (ticketParams.getType() != null && ticketParams.getOutOfTime() == false) {
+                itTicket = ticketRespository.findByType(ticketParams.getType());
+            } else if (ticketParams.getOutOfTime() == true && ticketParams.getType() == null) {
+                itTicket = ticketRespository.findByExpectedDateBefore(LocalDate.now());
+            } else {
+                itTicket = ticketRespository.findAll();
             }
+
             // TODO: FALTAN TALVEZ CORROBORAR OTROS CASOS O REFACTORIZARLO ...
             itTicket.forEach(tickets::add);
             return tickets;

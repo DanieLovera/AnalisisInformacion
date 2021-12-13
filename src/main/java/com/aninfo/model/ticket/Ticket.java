@@ -29,6 +29,12 @@ public class Ticket {
     @Column(name = "task_id")
     private Long taskID;
 
+    @Column(name = "product_id")
+    private Long productID;
+
+    //@Column(name = "product_version")
+    //private Long productVersion;
+
     @Column(name = "subject")
     private String subject;
 
@@ -145,5 +151,13 @@ public class Ticket {
     @JsonIgnore
     public void setExpectedDate(LocalDate expectedDate) {
         this.expectedDate = expectedDate;
+    }
+
+    public Long getProductID() {
+        return productID;
+    }
+
+    public void setProductID(Long productID) {
+        this.productID = productID;
     }
 }

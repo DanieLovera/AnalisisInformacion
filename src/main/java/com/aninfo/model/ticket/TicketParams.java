@@ -1,17 +1,17 @@
-package com.aninfo.model;
+package com.aninfo.model.ticket;
 
 import com.aninfo.model.ticket.Type;
 
 public class TicketParams {
 
-    private Boolean outOfTime;
+    private boolean outOfTime;
     private Type type;
 
-    public Boolean getOutOfTime() {
+    public boolean getOutOfTime() {
         return outOfTime;
     }
 
-    public void setOutOfTime(Boolean outOfTime) {
+    public void setOutOfTime(boolean outOfTime) {
         this.outOfTime = outOfTime;
     }
 
