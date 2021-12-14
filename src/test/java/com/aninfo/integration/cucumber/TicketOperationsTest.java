@@ -100,4 +100,21 @@ public class TicketOperationsTest {
         assertEquals(this.response.statusCode(), 200);
         //TODO un get del ticketID debería dar 404
     }
+
+    @When("Quiero eliminar el ticket con ID (\\d+)")
+    public void delete_invalid_ticket(Long ticketID)
+            throws URISyntaxException, IOException, InterruptedException {
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest
+                .newBuilder(new URI(apiServiceUrl + "/tickets/" + ticketID))
+                .DELETE()
+                .build();
+
+        this.response = client.send(request, HttpResponse.BodyHandlers.ofString());
+    }
+
+    @Then("La eliminacion devuelve error")
+    public void check_invalid_deleted_ticket() {
+        assertEquals(404, this.response.statusCode());
+    }
 }
