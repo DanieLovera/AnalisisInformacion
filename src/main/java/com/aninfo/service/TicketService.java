@@ -1,10 +1,12 @@
 package com.aninfo.service;
 
+import com.aninfo.model.exceptions.ResourceNotFoundException;
 import com.aninfo.model.ticket.TicketParams;
 import com.aninfo.model.ticket.State;
 import com.aninfo.model.ticket.Ticket;
 import com.aninfo.repository.TicketRespository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -60,6 +62,10 @@ public class TicketService {
         }
 
         public void delete(Long ticketID) {
+            System.out.println("Estoy acá");
+            if (!ticketRespository.existsById(ticketID)) {
+                throw new ResourceNotFoundException("The given ID does not exists.");
+            }
             ticketRespository.deleteById(ticketID);
         }
 }
