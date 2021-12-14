@@ -12,15 +12,19 @@ public class ProductRepository {
         List<Product> products = new ArrayList<>();
         products.add(new Product(Long.valueOf(1),
                            "SIU Guarani",
-                                 Arrays.asList(Float.valueOf(1.0F),
-                                               Float.valueOf(2.0F),
-                                               Float.valueOf(3.0F))));
+                                 Arrays.asList("1.0.0",
+                                               "1.0.1",
+                                               "1.1.0",
+                                               "1.1.1",
+                                               "1.1.2",
+                                               "2.0.0")));
 
         products.add(new Product(Long.valueOf(2),
                            "Campus FIUBA",
-                                 Arrays.asList(Float.valueOf(1.0F),
-                                               Float.valueOf(2.0F),
-                                               Float.valueOf(3.0F))));
+                                 Arrays.asList("1.0.0",
+                                                "1.1.0",
+                                                "1.2.0",
+                                                "1.2.1")));
 
         return products;
     }

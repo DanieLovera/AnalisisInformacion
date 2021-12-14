@@ -14,9 +14,9 @@ public class Product {
     @JsonProperty("name")
     private String name;
     @JsonProperty("versions")
-    private Collection<Float> versions;
+    private Collection<String> versions;
 
-    public Product(Long productID, String name, Collection<Float> versions) {
+    public Product(Long productID, String name, Collection<String> versions) {
         this.productID = productID;
         this.name = name;
         this.versions = versions;
@@ -30,7 +30,7 @@ public class Product {
         return name;
     }
 
-    public Collection<Float> getVersions() {
+    public Collection<String> getVersions() {
         return versions;
     }
 
@@ -42,7 +42,7 @@ public class Product {
         this.name = name;
     }
 
-    public void setVersion(ArrayList<Float> version) {
+    public void setVersion(ArrayList<String> version) {
         this.versions = version;
     }
 
