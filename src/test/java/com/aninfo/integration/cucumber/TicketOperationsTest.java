@@ -3,20 +3,36 @@ package com.aninfo.integration.cucumber;
 import com.aninfo.model.ticket.Severity;
 import com.aninfo.model.ticket.State;
 import com.aninfo.model.ticket.Ticket;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import net.minidev.json.JSONObject;
 
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.net.Socket;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.util.Map;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class TicketOperationsTest {
 
     private Ticket ticket;
+    private String apiServiceUrl = "http://localhost:8081";
+    private HttpResponse<String> response;
+    private Long ticketID;
 
     @Given("Existe un ticket creado")
     public void any_ticket()  {ticket = new Ticket();}
@@ -39,4 +55,49 @@ public class TicketOperationsTest {
     @Then("^El ticket se modifica correctamente y ahora el id del operario asignado es (\\d+)")
     public void check_ticket_employee(Long employeeID){assertEquals(ticket.getEmployeeID(), employeeID);}
 
+    @Given("^Se creo un ticket con parametros: (\\d+), \"([^\"]*)\", (\\d+), (\\d+), \"([^\"]*)\", \"([^\"]*)\", (\\d+), \"([^\"]*)\"$")
+    public void create_ticket_though_api(Long clientID, String description, Long employeeID, Long productID,
+                                         String severity, String subject, Long taskID, String type)
+            throws URISyntaxException, IOException, InterruptedException {
+
+
+        JSONObject ticketRequest = new JSONObject();
+        ticketRequest.put("clientID", clientID);
+        ticketRequest.put("description", description);
+        ticketRequest.put("employeeID", employeeID);
+        ticketRequest.put("productID", productID);
+        ticketRequest.put("severity", severity);
+        ticketRequest.put("subject", subject);
+        ticketRequest.put("taskID", taskID);
+        ticketRequest.put("type", type);
+
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest
+                .newBuilder(new URI(apiServiceUrl + "/tickets"))
+                .POST(HttpRequest.BodyPublishers.ofString(ticketRequest.toString()))
+                .header("Content-Type", "application/json")
+                .build();
+
+        this.response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        Map map = new ObjectMapper().readValue(this.response.body(), Map.class);
+        ticketID = Long.valueOf(map.get("ticketID").toString());
+    }
+
+    @When("Quiero eliminar dicho ticket")
+    public void delete_created_ticket()
+            throws URISyntaxException, IOException, InterruptedException {
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest
+                .newBuilder(new URI(apiServiceUrl + "/tickets/" + this.ticketID))
+                .DELETE()
+                .build();
+
+        this.response = client.send(request, HttpResponse.BodyHandlers.ofString());
+    }
+
+    @Then("La eliminacion se realiza correctamente")
+    public void check_deleted_ticket() throws URISyntaxException {
+        assertEquals(this.response.statusCode(), 200);
+        //TODO un get del ticketID debería dar 404
+    }
 }
