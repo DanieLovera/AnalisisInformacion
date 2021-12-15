@@ -5,6 +5,8 @@ import com.aninfo.model.ticket.State;
 import com.aninfo.model.ticket.Ticket;
 import com.aninfo.model.ticket.Type;
 import com.aninfo.model.ticket.filters.ByExpectedDateBefore;
+import com.aninfo.model.ticket.filters.ByProductID;
+import com.aninfo.model.ticket.filters.ByProductVersion;
 import com.aninfo.model.ticket.filters.ByType;
 import com.aninfo.repository.TicketRespository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,10 +32,13 @@ public class TicketService {
             return ticketRespository.save(ticket);
         }
 
-        public Collection<Ticket> getTickets(Type type, Boolean outOfTime) {
+        public Collection<Ticket> getTickets(Type type, Boolean outOfTime,
+                                             Long productID, String productVersion) {
             // Crear mas especificaciones si hay mas filtros
             Specification<Ticket> spec = Specification.where(new ByType(type))
-                    .and(new ByExpectedDateBefore(outOfTime));
+                    .and(new ByExpectedDateBefore(outOfTime))
+                    .and(new ByProductID(productID))
+                    .and(new ByProductVersion(productVersion));
             return ticketRespository.findAll(spec);
         }
 

@@ -29,8 +29,10 @@ public class TicketController {
     @GetMapping
     public Collection<Ticket> getTickets(
             @RequestParam(value = "type", required = false) Type type,
-            @RequestParam(value = "outOfTime", required = false) Boolean outOfTime) {
-        return ticketService.getTickets(type, outOfTime);
+            @RequestParam(value = "outOfTime", required = false) Boolean outOfTime,
+            @RequestParam(value = "productID", required = false) Long productID,
+            @RequestParam(value = "productVersion", required = false) String productVersion) {
+        return ticketService.getTickets(type, outOfTime, productID, productVersion);
     }
 
     @PutMapping(path = "{id}/updateState")

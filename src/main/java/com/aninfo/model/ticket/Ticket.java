@@ -2,11 +2,6 @@ package com.aninfo.model.ticket;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
-import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
-
 import javax.persistence.*;
 import java.time.LocalDate;
 
@@ -29,11 +24,13 @@ public class Ticket {
     @Column(name = "task_id")
     private Long taskID;
 
+    // DUDA EN ID Y VERSION PARECEN UN
+    // PAR NECESARIO PARA DEFINIR EL PRODUCTO COMPLETO
     @Column(name = "product_id")
     private Long productID;
 
-    //@Column(name = "product_version")
-    //private Long productVersion;
+    @Column(name = "product_version")
+    private String productVersion;
 
     @Column(name = "subject")
     private String subject;
@@ -56,8 +53,6 @@ public class Ticket {
     private LocalDate createdDate;
 
     @Column(name = "expected_date")
-    //@JsonDeserialize(using = LocalDateDeserializer.class)
-    //@JsonSerialize(using = LocalDateSerializer.class)
     @JsonIgnore
     private LocalDate expectedDate;
 
@@ -159,5 +154,13 @@ public class Ticket {
 
     public void setProductID(Long productID) {
         this.productID = productID;
+    }
+
+    public String getProductVersion() {
+        return productVersion;
+    }
+
+    public void setProductVersion(String productVersion) {
+        this.productVersion = productVersion;
     }
 }
