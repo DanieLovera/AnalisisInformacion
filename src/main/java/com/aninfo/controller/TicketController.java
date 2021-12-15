@@ -1,5 +1,6 @@
 package com.aninfo.controller;
 
+import com.aninfo.model.ticket.FilterParams;
 import com.aninfo.model.ticket.State;
 import com.aninfo.model.ticket.Ticket;
 import com.aninfo.model.ticket.Type;
@@ -27,12 +28,8 @@ public class TicketController {
     }
 
     @GetMapping
-    public Collection<Ticket> getTickets(
-            @RequestParam(value = "type", required = false) Type type,
-            @RequestParam(value = "outOfTime", required = false) Boolean outOfTime,
-            @RequestParam(value = "productID", required = false) Long productID,
-            @RequestParam(value = "productVersion", required = false) String productVersion) {
-        return ticketService.getTickets(type, outOfTime, productID, productVersion);
+    public Collection<Ticket> getTickets(FilterParams filterParams) {
+        return ticketService.getTickets(filterParams);
     }
 
     @PutMapping(path = "{id}/updateState")

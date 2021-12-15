@@ -1,6 +1,7 @@
 package com.aninfo.service;
 
 import com.aninfo.model.exceptions.ResourceNotFoundException;
+import com.aninfo.model.ticket.FilterParams;
 import com.aninfo.model.ticket.State;
 import com.aninfo.model.ticket.Ticket;
 import com.aninfo.model.ticket.Type;
@@ -32,13 +33,12 @@ public class TicketService {
             return ticketRespository.save(ticket);
         }
 
-        public Collection<Ticket> getTickets(Type type, Boolean outOfTime,
-                                             Long productID, String productVersion) {
+        public Collection<Ticket> getTickets(FilterParams filterParams) {
             // Crear mas especificaciones si hay mas filtros
-            Specification<Ticket> spec = Specification.where(new ByType(type))
-                    .and(new ByExpectedDateBefore(outOfTime))
-                    .and(new ByProductID(productID))
-                    .and(new ByProductVersion(productVersion));
+            Specification<Ticket> spec = Specification.where(new ByType(filterParams.getType()))
+                    .and(new ByExpectedDateBefore(filterParams.getOutOfTime()))
+                    .and(new ByProductID(filterParams.getProductID()))
+                    .and(new ByProductVersion(filterParams.getProductVersion()));
             return ticketRespository.findAll(spec);
         }
 
