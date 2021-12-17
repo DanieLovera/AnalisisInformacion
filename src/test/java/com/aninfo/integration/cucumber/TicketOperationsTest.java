@@ -3,12 +3,7 @@ package com.aninfo.integration.cucumber;
 import com.aninfo.model.ticket.Severity;
 import com.aninfo.model.ticket.State;
 import com.aninfo.model.ticket.Ticket;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ObjectNode;
-import cucumber.api.java.After;
-import cucumber.api.java.Before;
-import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -16,8 +11,6 @@ import net.minidev.json.JSONObject;
 
 
 import java.io.IOException;
-import java.net.InetSocketAddress;
-import java.net.Socket;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.http.HttpClient;
@@ -30,7 +23,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class TicketOperationsTest {
 
     private Ticket ticket;
-    private String apiServiceUrl = "http://localhost:8081";
+    private final String apiServiceUrl = "https://soporte-fiuba.herokuapp.com/";
     private HttpResponse<String> response;
     private Long ticketID;
 
@@ -56,8 +49,8 @@ public class TicketOperationsTest {
     public void check_ticket_employee(Long employeeID){assertEquals(ticket.getEmployeeID(), employeeID);}
 
     @Given("^Se creo un ticket con parametros: (\\d+), \"([^\"]*)\", (\\d+), (\\d+), \"([^\"]*)\", \"([^\"]*)\", (\\d+), \"([^\"]*)\"$")
-    public void create_ticket_though_api(Long clientID, String description, Long employeeID, Long productID,
-                                         String severity, String subject, Long taskID, String type)
+    public void create_ticket_through_api(Long clientID, String description, Long employeeID, Long productID,
+                                          String severity, String subject, Long taskID, String type)
             throws URISyntaxException, IOException, InterruptedException {
 
 
@@ -96,7 +89,7 @@ public class TicketOperationsTest {
     }
 
     @Then("La eliminacion se realiza correctamente")
-    public void check_deleted_ticket() throws URISyntaxException {
+    public void check_deleted_ticket() {
         assertEquals(this.response.statusCode(), 200);
         //TODO un get del ticketID debería dar 404
     }
