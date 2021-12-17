@@ -6,13 +6,13 @@ public enum Severity {
     S3(90),
     S4(365);
 
-    private int value;
+    private Integer value;
 
-    private Severity(int value) {
+    private Severity(Integer value) {
         this.value = value;
     }
 
-    public int getValue() {
+    public Integer getValue() {
         return value;
     }
 }

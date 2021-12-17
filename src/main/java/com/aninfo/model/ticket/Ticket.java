@@ -2,6 +2,8 @@ package com.aninfo.model.ticket;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.beans.factory.annotation.Required;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 
@@ -15,7 +17,7 @@ public class Ticket {
     @Column(name = "ticket_id")
     private Long ticketID;
 
-    @Column(name = "client_id")
+    @Column(name = "client_id", nullable = false)
     private Long clientID;
 
     @Column(name = "employee_id")
@@ -26,33 +28,32 @@ public class Ticket {
 
     // DUDA EN ID Y VERSION PARECEN UN
     // PAR NECESARIO PARA DEFINIR EL PRODUCTO COMPLETO
-    @Column(name = "product_id")
+    @Column(name = "product_id", nullable = false)
     private Long productID;
 
-    @Column(name = "product_version")
+    @Column(name = "product_version", nullable = false)
     private String productVersion;
 
-    @Column(name = "subject")
+    @Column(name = "subject", nullable = false)
     private String subject;
 
-    @Column(name = "description")
+    @Column(name = "description", nullable = false)
     private String description;
 
-    @Column(name = "type")
+    @Column(name = "type", nullable = false)
     private Type type;
 
-    @Column(name = "state")
-    @JsonIgnore
+    @Column(name = "state", nullable = false)
     private State state;
 
-    @Column(name = "severity")
+    @Column(name = "severity", nullable = false)
     private Severity severity;
 
-    @Column(name = "created_date")
+    @Column(name = "created_date", nullable = false)
     @JsonIgnore
     private LocalDate createdDate;
 
-    @Column(name = "expected_date")
+    @Column(name = "expected_date", nullable = false)
     @JsonIgnore
     private LocalDate expectedDate;
 
@@ -83,7 +84,6 @@ public class Ticket {
         return type;
     }
 
-    @JsonProperty
     public State getState() {
         return state;
     }
@@ -129,7 +129,6 @@ public class Ticket {
         this.type = type;
     }
 
-    @JsonIgnore
     public void setState(State state) {
         this.state = state;
     }

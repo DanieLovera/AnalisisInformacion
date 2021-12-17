@@ -12,6 +12,7 @@ import com.aninfo.model.ticket.filters.ByType;
 import com.aninfo.repository.TicketRespository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -25,10 +26,13 @@ public class TicketService {
         private TicketRespository ticketRespository;
 
         public Ticket create(Ticket ticket) {
-            int severityDays = ticket.getSeverity().getValue();
+            int severityDays = 0;
             LocalDate currentDate = LocalDate.now();
+            if (ticket.getSeverity() != null){
+                severityDays = ticket.getSeverity().getValue();
+                ticket.setExpectedDate(currentDate.plusDays(severityDays));
+            }
             ticket.setCreatedDate(currentDate);
-            ticket.setExpectedDate(currentDate.plusDays(severityDays));
             ticket.setState(State.OPEN);
             return ticketRespository.save(ticket);
         }
@@ -42,11 +46,30 @@ public class TicketService {
             return ticketRespository.findAll(spec);
         }
 
-        public Ticket update(Long ticketID, State state) {
+        public ResponseEntity<Ticket> getTicket(Long ticketID) {
+            Optional<Ticket> oticket = ticketRespository.findById(ticketID);
+            Ticket ticket = oticket.get();
+            if (!oticket.isPresent()){
+                return ResponseEntity.notFound().build();
+            }
+            return ResponseEntity.of(oticket);
+        }
+
+        /*public Ticket update(Long ticketID, State state) {
             Optional<Ticket> oticket = ticketRespository.findById(ticketID);
             Ticket ticket = oticket.get();
             ticket.setState(state);
             return ticketRespository.save(ticket);
+        }*/
+
+        public ResponseEntity<Object> update(Long ticketID, Ticket ticket) {
+            Optional<Ticket> oticket = ticketRespository.findById(ticketID);
+            if (!oticket.isPresent())
+                return ResponseEntity.notFound().build();
+
+            ticket.setTicketID(ticketID);
+            ticketRespository.save(ticket);
+            return ResponseEntity.noContent().build();
         }
 
         public void delete(Long ticketID) {
