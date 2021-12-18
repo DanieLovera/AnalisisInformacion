@@ -20,7 +20,6 @@ public class ClientService {
 
     public ResponseEntity<Client> getClient(Long clientID) {
         Optional<Client> oclient = clientRepository.findById(clientID);
-        Client client = oclient.get();
         if (!oclient.isPresent()){
             return ResponseEntity.notFound().build();
         }

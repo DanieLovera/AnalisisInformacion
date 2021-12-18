@@ -25,6 +25,6 @@ public class ClientRepository {
         Client clientFiltered = Arrays.stream(clients).filter(client -> clientID.equals(client.getClientId()))
                 .findAny()
                 .orElse(null);
-        return Optional.of(clientFiltered);
+        return Optional.ofNullable(clientFiltered);
     }
 }

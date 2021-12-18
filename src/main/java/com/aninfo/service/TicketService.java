@@ -48,8 +48,7 @@ public class TicketService {
 
         public ResponseEntity<Ticket> getTicket(Long ticketID) {
             Optional<Ticket> oticket = ticketRespository.findById(ticketID);
-            Ticket ticket = oticket.get();
-            if (!oticket.isPresent()){
+            if (!oticket.isPresent()) {
                 return ResponseEntity.notFound().build();
             }
             return ResponseEntity.of(oticket);
