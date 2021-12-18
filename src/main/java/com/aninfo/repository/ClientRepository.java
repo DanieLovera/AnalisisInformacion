@@ -4,6 +4,7 @@ import com.aninfo.model.client.Client;
 import org.springframework.web.client.RestTemplate;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Optional;
 
 public class ClientRepository {
 
@@ -17,5 +18,13 @@ public class ClientRepository {
     public Collection<Client> findAll() {
         Client[] clients = restTemplate.getForObject(url, Client[].class);
         return Arrays.asList(clients);
+    }
+
+    public Optional<Client> findById(Long clientID) {
+        Client[] clients = restTemplate.getForObject(url, Client[].class);
+        Client clientFiltered = Arrays.stream(clients).filter(client -> clientID.equals(client.getClientId()))
+                .findAny()
+                .orElse(null);
+        return Optional.of(clientFiltered);
     }
 }
