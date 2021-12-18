@@ -48,9 +48,9 @@ public class TicketOperationsTest {
     @Then("^El ticket se modifica correctamente y ahora el id del operario asignado es (\\d+)")
     public void check_ticket_employee(Long employeeID){assertEquals(ticket.getEmployeeID(), employeeID);}
 
-    @Given("^Se creo un ticket con parametros: (\\d+), \"([^\"]*)\", (\\d+), (\\d+), \"([^\"]*)\", \"([^\"]*)\", (\\d+), \"([^\"]*)\"$")
+    @Given("^Se creo un ticket con parametros: (\\d+), \"([^\"]*)\", (\\d+), (\\d+), \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\", (\\d+), \"([^\"]*)\"$")
     public void create_ticket_through_api(Long clientID, String description, Long employeeID, Long productID,
-                                          String severity, String subject, Long taskID, String type)
+                                          String productVersion, String severity, String subject, Long taskID, String type)
             throws URISyntaxException, IOException, InterruptedException {
 
 
@@ -59,6 +59,7 @@ public class TicketOperationsTest {
         ticketRequest.put("description", description);
         ticketRequest.put("employeeID", employeeID);
         ticketRequest.put("productID", productID);
+        ticketRequest.put("productVersion", productVersion);
         ticketRequest.put("severity", severity);
         ticketRequest.put("subject", subject);
         ticketRequest.put("taskID", taskID);
