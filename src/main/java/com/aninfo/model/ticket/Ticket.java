@@ -2,10 +2,10 @@ package com.aninfo.model.ticket;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.springframework.beans.factory.annotation.Required;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "ticket")
@@ -23,8 +23,8 @@ public class Ticket {
     @Column(name = "employee_id")
     private Long employeeID;
 
-    @Column(name = "task_id")
-    private Long taskID;
+    @ElementCollection
+    private List<Long> taskIDs;
 
     // DUDA EN ID Y VERSION PARECEN UN
     // PAR NECESARIO PARA DEFINIR EL PRODUCTO COMPLETO
@@ -70,7 +70,7 @@ public class Ticket {
         return employeeID;
     }
 
-    public Long getTaskID() { return taskID; }
+    public List<Long> getTaskIDs() { return taskIDs; }
 
     public String getSubject() {
         return subject;
@@ -115,7 +115,7 @@ public class Ticket {
         this.employeeID = employeeID;
     }
 
-    public void setTaskID(Long taskID) { this.taskID = taskID; }
+    public void setTaskIDs(List<Long> taskIDs) { this.taskIDs = taskIDs; }
 
     public void setSubject(String subject) {
         this.subject = subject;

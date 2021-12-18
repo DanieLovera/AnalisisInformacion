@@ -16,6 +16,7 @@ import java.net.URISyntaxException;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.List;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -48,11 +49,10 @@ public class TicketOperationsTest {
     @Then("^El ticket se modifica correctamente y ahora el id del operario asignado es (\\d+)")
     public void check_ticket_employee(Long employeeID){assertEquals(ticket.getEmployeeID(), employeeID);}
 
-    @Given("^Se creo un ticket con parametros: (\\d+), \"([^\"]*)\", (\\d+), (\\d+), \"([^\"]*)\", \"([^\"]*)\", (\\d+), \"([^\"]*)\"$")
+    @Given("^Se creo un ticket con parametros: (\\d+), \"([^\"]*)\", (\\d+), (\\d+), \"([^\"]*)\", \"([^\"]*)\", (.*), \"([^\"]*)\"$")
     public void create_ticket_through_api(Long clientID, String description, Long employeeID, Long productID,
-                                          String severity, String subject, Long taskID, String type)
+                                          String severity, String subject, List<Long> taskIDs, String type)
             throws URISyntaxException, IOException, InterruptedException {
-
 
         JSONObject ticketRequest = new JSONObject();
         ticketRequest.put("clientID", clientID);
@@ -61,7 +61,7 @@ public class TicketOperationsTest {
         ticketRequest.put("productID", productID);
         ticketRequest.put("severity", severity);
         ticketRequest.put("subject", subject);
-        ticketRequest.put("taskID", taskID);
+        ticketRequest.put("taskIDs", taskIDs);
         ticketRequest.put("type", type);
 
         HttpClient client = HttpClient.newHttpClient();

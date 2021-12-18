@@ -1,4 +1,3 @@
-
 Feature: Vincular responsable del ticket
   Como usuario quiero asignar un operario de soporte responsable del ticket
   para que lo pueda realizar.
