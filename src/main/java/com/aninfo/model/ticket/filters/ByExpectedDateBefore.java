@@ -20,7 +20,7 @@ public class ByExpectedDateBefore implements Specification<Ticket> {
     @Override
     public Predicate toPredicate(Root<Ticket> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
         if (this.outOfTime == Boolean.TRUE) {
-            return criteriaBuilder.lessThan(root.get("expectedDate"), LocalDate.now());
+            return criteriaBuilder.lessThanOrEqualTo(root.get("expectedDate"), LocalDate.now());
         }
         return criteriaBuilder.isTrue(criteriaBuilder.literal(true));
     }
