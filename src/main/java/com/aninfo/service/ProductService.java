@@ -18,7 +18,7 @@ public class ProductService {
         return productRepository.findAll();
     }
 
-    public ResponseEntity<Product> getClient(Long productID) {
+    public ResponseEntity<Product> getProduct(Long productID) {
         Optional<Product> oproduct = productRepository.findById(productID);
         if (!oproduct.isPresent()){
             return ResponseEntity.notFound().build();
