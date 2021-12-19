@@ -67,6 +67,9 @@ public class TicketService {
                 return ResponseEntity.notFound().build();
 
             ticket.setTicketID(ticketID);
+            ticket.setCreatedDate(oticket.get().getCreatedDate());
+            ticket.setExpectedDate(oticket.get().getExpectedDate());
+
             ticketRespository.save(ticket);
             return ResponseEntity.noContent().build();
         }
