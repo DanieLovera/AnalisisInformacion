@@ -6,13 +6,13 @@ public enum Severity {
     S3(90),
     S4(365);
 
-    private Integer value;
+    private final Integer responseTime;
 
-    private Severity(Integer value) {
-        this.value = value;
+    Severity(Integer responseTime) {
+        this.responseTime = responseTime;
     }
 
-    public Integer getValue() {
-        return value;
+    public Integer getResponseTime() {
+        return responseTime;
     }
 }

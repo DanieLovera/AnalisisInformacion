@@ -4,7 +4,6 @@ import com.aninfo.model.exceptions.ResourceNotFoundException;
 import com.aninfo.model.ticket.FilterParams;
 import com.aninfo.model.ticket.State;
 import com.aninfo.model.ticket.Ticket;
-import com.aninfo.model.ticket.Type;
 import com.aninfo.model.ticket.filters.ByExpectedDateBefore;
 import com.aninfo.model.ticket.filters.ByProductID;
 import com.aninfo.model.ticket.filters.ByProductVersion;
@@ -26,10 +25,10 @@ public class TicketService {
         private TicketRespository ticketRespository;
 
         public Ticket create(Ticket ticket) {
-            int severityDays = 0;
+            int severityDays;
             LocalDate currentDate = LocalDate.now();
             if (ticket.getSeverity() != null){
-                severityDays = ticket.getSeverity().getValue();
+                severityDays = ticket.getSeverity().getResponseTime();
                 ticket.setExpectedDate(currentDate.plusDays(severityDays));
             }
             ticket.setCreatedDate(currentDate);
