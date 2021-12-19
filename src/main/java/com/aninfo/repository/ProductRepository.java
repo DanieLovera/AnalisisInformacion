@@ -1,10 +1,9 @@
 package com.aninfo.repository;
 
+import com.aninfo.model.client.Client;
 import com.aninfo.model.product.Product;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
+
+import java.util.*;
 
 public class ProductRepository {
 
@@ -27,5 +26,16 @@ public class ProductRepository {
                                                 "1.2.1")));
 
         return products;
+    }
+
+    public Optional<Product> findById(Long productID) {
+        Collection<Product> products = this.findAll();
+        Product[] _products = products.toArray(new Product[products.size()]);
+
+        Product productFiltered = Arrays.stream(_products)
+                .filter(product -> productID.equals(product.getProductID()))
+                .findAny()
+                .orElse(null);
+        return Optional.ofNullable(productFiltered);
     }
 }

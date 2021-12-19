@@ -1,7 +1,6 @@
 package com.aninfo.service;
 
 import com.aninfo.model.client.Client;
-import com.aninfo.model.ticket.Ticket;
 import com.aninfo.repository.ClientRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
